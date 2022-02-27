@@ -19,8 +19,7 @@ jobs:
           cd dstat
           docker build . -t dstat
           cd ..
-      - name: "Run logger"
-        run: docker run -t dstat -token $TOKEN -json > bot1.json
+          docker run dstat -token $TOKEN -json > ./bot1.json
         env:
           TOKEN: ${{ secrets.BOT_1_TOKEN }}
       - name: "Commit and push"
@@ -28,8 +27,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git pull --rebase
-          git commit -am "Logged bot1.json" --allow-empty
-          git push origin master
+          git commit -am "Logged bot1.json" || true
+          git push origin master || true
 
   bot2:
     name: Bot 2
@@ -43,8 +42,7 @@ jobs:
           cd dstat
           docker build . -t dstat
           cd ..
-      - name: "Run logger"
-        run: docker run -t dstat -token $TOKEN -json > bot2.json
+          docker run -t dstat -token $TOKEN -json > ./bot2.json
         env:
           TOKEN: ${{ secrets.BOT_2_TOKEN }}
       - name: "Commit and push"
@@ -52,5 +50,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git pull --rebase
-          git commit -am "Logged bot2.json" --allow-empty
-          git push origin master
+          git commit -am "Logged bot2.json" || true
+          git push origin master || true
