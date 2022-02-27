@@ -14,12 +14,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - name: "Build and run logger"
+      - name: "Build logger"
         run: |
           cd dstat
           docker build . -t dstat
           cd ..
-          docker run -t dstat -token $TOKEN -json > bot1.json
+      - name: "Run logger"
+        run: docker run -t dstat -token $TOKEN -json > bot1.json
         env:
           TOKEN: ${{ secrets.BOT_1_TOKEN }}
       - name: "Commit and push"
@@ -37,12 +38,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: 'true'
-      - name: "Build and run logger"
+      - name: "Build logger"
         run: |
           cd dstat
           docker build . -t dstat
           cd ..
-          docker run -t dstat -token $TOKEN -json > bot2.json
+      - name: "Run logger"
+        run: docker run -t dstat -token $TOKEN -json > bot2.json
         env:
           TOKEN: ${{ secrets.BOT_2_TOKEN }}
       - name: "Commit and push"
