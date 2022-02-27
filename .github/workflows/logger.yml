@@ -17,7 +17,7 @@ jobs:
       - name: "Build and run logger"
         run: |
           cd dstat
-          docker buid . -t dstat
+          docker build . -t dstat
           cd ..
           docker run dstat -token $TOKEN -json > bot1.json
         env:
@@ -40,7 +40,7 @@ jobs:
       - name: "Build and run logger"
         run: |
           cd dstat
-          docker buid . -t dstat
+          docker build . -t dstat
           cd ..
           docker run dstat -token $TOKEN -json > bot2.json
         env:
