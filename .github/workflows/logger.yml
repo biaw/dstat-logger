@@ -1,0 +1,54 @@
+name: Bot Stats Logger
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+
+  bot1:
+    name: Bot 1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - name: "Build and run logger"
+        run: |
+          cd dstat
+          docker buid . -t dstat
+          cd ..
+          docker run dstat -token $TOKEN -json > bot1.json
+        env:
+          TOKEN: ${{ secrets.BOT_1_TOKEN }}
+      - name: "Commit and push"
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase
+          git commit -am "Logged bot1.json" --allow-empty
+          git push origin master
+
+  bot2:
+    name: Bot 2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+      - name: "Build and run logger"
+        run: |
+          cd dstat
+          docker buid . -t dstat
+          cd ..
+          docker run dstat -token $TOKEN -json > bot2.json
+        env:
+          TOKEN: ${{ secrets.BOT_2_TOKEN }}
+      - name: "Commit and push"
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase
+          git commit -am "Logged bot2.json" --allow-empty
+          git push origin master
