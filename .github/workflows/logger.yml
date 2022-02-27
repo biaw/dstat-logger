@@ -19,7 +19,7 @@ jobs:
           cd dstat
           docker build . -t dstat
           cd ..
-          docker run dstat -token $TOKEN -json > bot1.json
+          docker run -t dstat -token $TOKEN -json > bot1.json
         env:
           TOKEN: ${{ secrets.BOT_1_TOKEN }}
       - name: "Commit and push"
@@ -42,7 +42,7 @@ jobs:
           cd dstat
           docker build . -t dstat
           cd ..
-          docker run dstat -token $TOKEN -json > bot2.json
+          docker run -t dstat -token $TOKEN -json > bot2.json
         env:
           TOKEN: ${{ secrets.BOT_2_TOKEN }}
       - name: "Commit and push"
