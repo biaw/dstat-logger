@@ -26,7 +26,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase
+          git pull
           git add bot1.json
           git commit -m "Logged bot1.json" || true
           git push origin master || true
@@ -50,7 +50,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase
+          git pull
           git add bot2.json
           git commit -m "Logged bot2.json" || true
           git push origin master || true
